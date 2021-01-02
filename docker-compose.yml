@@ -12,9 +12,7 @@ services:
     working_dir: /    
     depends_on:
       - redis
-    command: sh -c 'cd ruleta;./mvnw spring-boot:run'
-
-  
+    command: sh -c 'cd ruleta;./mvnw spring-boot:run'  
   redis:
     container_name: roulette-redis
     image: redis:latest
@@ -26,15 +24,3 @@ services:
     - 'yes'
     volumes:
     - .:/data
-
-  redis-commander:
-    container_name: roulette-redis-commander
-    image: rediscommander/redis-commander:latest
-    environment:
-    - REDIS_HOSTS=local:redis:6379 
-    ports:
-    - 8081:8081
-    depends_on:
-    - redis
-volumes:
-  redis-data: null
