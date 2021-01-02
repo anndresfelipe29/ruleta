@@ -72,6 +72,7 @@ public class RuletaController {
 				ruleta.setNumberWin((int) (Math.random() * 37));
 				ruleta.setBlackIsWin(Math.random() < 0.5);
 				ruletaRepository.update(ruleta);
+				//asignar el premio
 			} else {
 				// es una ruleta cerrada
 			}
