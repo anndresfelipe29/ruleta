@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import com.ruleta.models.User;
 import com.ruleta.repository.user.UserRepository;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -31,18 +33,18 @@ public class UserController {
 		return response;
 	}
 
-	@RequestMapping(value = "/findall", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
 	public Map<Long, User> findAll() {
 		Map<Long, User> users = userRepository.findAll();
 		return users;
 	}
 
-	@RequestMapping(value = "/find", method = RequestMethod.GET, produces = "application/json")
-	public User findById(@RequestParam("id") Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
+	public User findById(@PathVariable("id") Long id) {
 		return userRepository.find(id);
 	}
 
-	@RequestMapping(value = "/post", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public Map<String, String> postCustomer(@RequestBody User user) {
 		userRepository.save(new User(user.getId(), user.getFirstName(), user.getLastName()));
 		Map<String, String> response = new HashMap<String, String>();
@@ -50,15 +52,15 @@ public class UserController {
 		return response;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, produces = "application/json")
-	public Map<String, String> deleteById(@RequestParam("id") Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
+	public Map<String, String> deleteById(@PathVariable("id") Long id) {
 		userRepository.delete(id);
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("response", "OK");
 		return response;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.PATCH, produces = "application/json")
+	@RequestMapping(value = "", method = RequestMethod.PATCH, produces = "application/json")
 	public User updateCustomer(@RequestBody User userIn) {
 		User user = userRepository.find(userIn.getId());
 		user.setFirstName(userIn.getFirstName().toUpperCase());
