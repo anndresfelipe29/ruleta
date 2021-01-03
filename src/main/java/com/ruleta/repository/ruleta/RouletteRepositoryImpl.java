@@ -9,17 +9,17 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.ruleta.models.Ruleta;
+import com.ruleta.models.Roulette;
 
 @Repository
-public class RuletaRepositoryImpl implements RuletaRepository {
+public class RouletteRepositoryImpl implements RouletteRepository {
 
 	private static final String KEY = "ruleta";
 	private RedisTemplate<String, Object> redisTemplate;
-	private HashOperations<String, Long, Ruleta> hashOperations;
+	private HashOperations<String, Long, Roulette> hashOperations;
 
 	@Autowired
-	public RuletaRepositoryImpl(RedisTemplate<String, Object> redisTemplate) {
+	public RouletteRepositoryImpl(RedisTemplate<String, Object> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 
@@ -34,29 +34,30 @@ public class RuletaRepositoryImpl implements RuletaRepository {
 
 	public Long save() {
 		long id = generateId();
-		hashOperations.put(KEY, id, new Ruleta(id));
+		hashOperations.put(KEY, id, new Roulette(id));
 		return id;
 	}
 
 	@Override
-	public void save(Ruleta ruleta) {
-		hashOperations.put(KEY, ruleta.getId(), ruleta);
+	public void save(Roulette roulette) {
+		hashOperations.put(KEY, roulette.getId(), roulette);
 
 	}
 
 	@Override
-	public Ruleta find(Long id) {
+	public Roulette find(Long id) {
 		return hashOperations.get(KEY, id);
 	}
 
 	@Override
-	public Map<Long, Ruleta> findAll() {
+	public Map<Long, Roulette> findAll() {
+		
 		return hashOperations.entries(KEY);
 	}
 
 	@Override
-	public void update(Ruleta ruleta) {
-		hashOperations.put(KEY, ruleta.getId(), ruleta);
+	public void update(Roulette roulette) {
+		hashOperations.put(KEY, roulette.getId(), roulette);
 	}
 
 	@Override

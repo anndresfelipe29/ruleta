@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ruleta implements Serializable {
+public class Roulette implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long id;
@@ -12,20 +12,20 @@ public class Ruleta implements Serializable {
 	private int numberWin;
 	private boolean blackIsWin;
 	private boolean isNew;
-	private List<Object> bets;
+	private List<Bet> bets;
 
-	protected Ruleta() {
+	protected Roulette() {
 	}
 
-	public Ruleta(long id) {
+	public Roulette(long id) {
 		this.id = id;
 		this.isNew = true;
 		this.numberWin = -1;
-		this.bets= new ArrayList<Object>();
+		this.bets= new ArrayList<Bet>();
 
 	}
 
-	public Ruleta(long id, boolean isOpen, int numberWin, boolean blackIsWin) {
+	public Roulette(long id, boolean isOpen, int numberWin, boolean blackIsWin) {
 		this.id = id;
 		this.isOpen = isOpen;
 		this.numberWin = numberWin;
@@ -73,11 +73,11 @@ public class Ruleta implements Serializable {
 		this.isNew = isNew;
 	}
 
-	public List<Object> getBet() {
+	public List<Bet> getBet() {
 		return bets;
 	}
 
-	public void setBet(List<Object> bets) {
+	public void setBet(List<Bet> bets) {
 		this.bets = bets;
 	}
 }

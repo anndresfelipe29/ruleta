@@ -8,6 +8,7 @@ public class User implements Serializable {
 	private long id;
 	private String firstName;
 	private String lastName;
+	private double cash;
 
 	protected User() {
 	}
@@ -16,6 +17,7 @@ public class User implements Serializable {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		cash=15000;
 	}
 
 	public long getId() {
@@ -40,6 +42,14 @@ public class User implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public double getCash() {
+		return cash;
+	}
+
+	public void setCash(double cash) {
+		this.cash = cash;
 	}
 
 }

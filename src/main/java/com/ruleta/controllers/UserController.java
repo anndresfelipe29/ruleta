@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ruleta.logic.UserLogic;
 import com.ruleta.models.User;
 import com.ruleta.repository.user.UserRepository;
 
@@ -18,6 +18,9 @@ import com.ruleta.repository.user.UserRepository;
 @RequestMapping("/user")
 public class UserController {
 
+	@Autowired
+	private UserLogic userLogic; 
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -34,17 +37,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-	public Map<Long, User> findAll() {
-		Map<Long, User> users = userRepository.findAll();
-		return users;
+	public Map<Long, User> findAll() {		
+		return userLogic.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	public User findById(@PathVariable("id") Long id) {
-		return userRepository.find(id);
+		return userLogic.findById(id);
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+	/*@RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
 	public Map<String, String> postCustomer(@RequestBody User user) {
 		userRepository.save(new User(user.getId(), user.getFirstName(), user.getLastName()));
 		Map<String, String> response = new HashMap<String, String>();
@@ -58,15 +60,11 @@ public class UserController {
 		Map<String, String> response = new HashMap<String, String>();
 		response.put("response", "OK");
 		return response;
-	}
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.PATCH, produces = "application/json")
-	public User updateCustomer(@RequestBody User userIn) {
-		User user = userRepository.find(userIn.getId());
-		user.setFirstName(userIn.getFirstName().toUpperCase());
-		user.setLastName(userIn.getLastName().toUpperCase());
-		userRepository.update(user);
-		return userRepository.find(userIn.getId());
+	public User updateCustomer(@RequestBody User userIn) {		
+		return userLogic.update(userIn);
 	}
 
 }

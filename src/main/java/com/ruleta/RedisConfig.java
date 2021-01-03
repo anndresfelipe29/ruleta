@@ -10,10 +10,10 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
 @Configuration
 public class RedisConfig {
-	
+	//"${RedisURL}"
 	@Bean
 	public JedisConnectionFactory redisConnectionFactory() {	
-		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("172.17.0.1", 6379);
+		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(System.getenv().get("RedisURL"), Integer.parseInt( System.getenv().get("RedisPort") ));
 	    redisStandaloneConfiguration.setPassword(RedisPassword.of(""));
 	    return new JedisConnectionFactory(redisStandaloneConfiguration);
 	}

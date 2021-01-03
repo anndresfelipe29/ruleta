@@ -1,18 +1,19 @@
 version: '3.7'
 services:
   spring:
-    image: openjdk:8-jre-alpine
+    image: openjdk:8-jdk-alpine
     container_name: roulette
     volumes:
-      - .:/ruleta 
+      - .:/home/ruleta 
     environment: 
-      - PORT:8080
+      - RedisURL=172.17.0.1
+      - RedisPort=6379
     ports:
       - 8080:8080
-    working_dir: /    
+    working_dir: /home/ruleta   
     depends_on:
       - redis
-    command: sh -c 'cd ruleta;./mvnw spring-boot:run'  
+    command: sh -c 'ls;./mvnw spring-boot:run'  
   redis:
     container_name: roulette-redis
     image: redis:latest
