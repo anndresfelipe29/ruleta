@@ -16,7 +16,7 @@ public class BetLogic {
 	public boolean reward(List<Bet> bets, boolean blackIsWin, int winNumber) {
 		try {
 			for (Bet bet : bets) {
-				if (bet.getblackIsWin() == blackIsWin) {
+				if ((bet.getblackIsWin() == blackIsWin) && (bet.getNumberWin()==-1)) { 
 					userLogic.updateCash(bet.getUserOwnerId(), (bet.getAmount() * 1.8));
 
 				}

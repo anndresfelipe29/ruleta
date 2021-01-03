@@ -23,6 +23,7 @@ public class Bet implements Serializable {
 		this.rouletteId= ruletaId;
 		this.blackIsWin=blackIsWin;
 		this.amount=amount;
+		this.numberWin=-1; 
 	}
 	public Bet() {}
 
