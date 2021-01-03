@@ -25,6 +25,9 @@ Puede usar este aplicativo accediento a:
 ## Funcionalidades
 
 Las rutas disponibles son:
+- /user/save [post] Crea 5 usuarios por defecto con una cantidad de 15000 en dinero.
+- /user [get] muestra a todos los usuarios y su dinero.
+- /user/{id} [get] muestra la informción de de un usuario específico a partir de su id.
 - /ruleta [get] Muestra todas las ruletas y sus estados.
 - /ruleta [post] Crea una nueva ruleta y retorna su Id.
 - /ruleta/{id} [get] Muestra una ruleta en especifico, {id} es un id de ruleta.
